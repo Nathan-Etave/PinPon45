@@ -5,18 +5,26 @@ main{
 body{
     overflow: hidden;
 }
-.page_connexion {
+.page_connexion, .page_inscription{
     background: #004F8A;
     display: flex;
     flex-wrap: wrap;
     margin-top: 2rem;
     flex-basis: calc(100%/3);
     border-radius: 5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 .email>p, .password>p {
     color: white;
     font-size: 200%;
 
+}
+h1{
+    color: white;
+    text-align: center;
+    font-size: 300%;
+    margin-top: 2rem;
 }
 .email>input, .password>input {
     border: none;
@@ -58,6 +66,28 @@ body{
    
 body{
     margin: 0%;
+}
+.mdp_oublier{
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    flex-basis: 100%;
+    text-align: center;
+    
+
+}
+.mdp_oublier>a{
+    text-decoration: none;
+
+    font-size: 100%;
+    padding: 1rem;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 2rem;
+}
+.mdp_oublier>a:hover{
+    color: rgb(253, 0, 0);
+    transition: 0.3s;
 }
 
 

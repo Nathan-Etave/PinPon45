@@ -1,5 +1,5 @@
 import os
-from app import app, nlp
+from app import app
 from flask import render_template, request, redirect, url_for, make_response, send_file, jsonify, Response
 from flask_login import login_required, login_user, logout_user, current_user
 from flask_bcrypt import generate_password_hash, check_password_hash
@@ -17,18 +17,11 @@ from app.requests import (get_root_categories, get_user_by_id, get_user_by_email
                           get_file_by_extension, get_all_extension, remove_forbiden_file, desactivate_user, get_all_roles, add_user,
                           already_exist_mail, get_user_access, get_user_by_name, get_role_pompier, check_duplicate_user, get_user_by_role,
                           update_user_role, get_category_by_role, modify_role_categories_database, add_role_to_databse)
-from app.forms import LoginForm, EditUserForm, AddUserForm, EditUserFormStringPassword
+from app.forms import LoginForm, EditUserForm, AddUserForm, EditUserFormStringPassword,InscriptionForm
 from app import login_manager
 import base64
 import collections
 
-process_functions = {
-    'pdf': nlp.process_pdf,
-    'docx': nlp.process_docx,
-    'xlsx': nlp.process_sheet,
-    'pptx': nlp.process_presentation,
-    'txt': nlp.process_txt,
-}
 
 @app.after_request
 def add_cookie(response):
@@ -66,14 +59,30 @@ def activated_required(f):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    user = get_user_by_email(form.mail.data)
-    if form.validate_on_submit():
+    form_login = LoginForm()
+    user = get_user_by_email(form_login.mail.data)
+    form_inscription = InscriptionForm()
+    print("form_inscription.validate_on_submit()")
+    if form_inscription.validate_on_submit():
+        #une mdp aléatoire est généré
+        passe= "$2b$12$yZ4bKUsJdEkcnBSsCUynze3rSdCW17As0.1xztdqVJi6iHYGKcXWe"
+        
+        print("Form validé")
+        role = 2
+        
+        if already_exist_mail(form_inscription.mail.data):
+            print("Mail déjà utilisé")
+            
+        else:
+            print("Mail non utilisé")
+            add_user(form_inscription.prenom.data, form_inscription.nom.data, form_inscription.mail.data,form_inscription.telephone.data,role, passe)
+    if form_login.validate_on_submit():
         if user:
-            if check_password_hash(user.mdpPompier, form.mdp.data):
+            if check_password_hash(user.mdpPompier, form_login.mdp.data):
                 login_user(user, remember=True)
                 return redirect(url_for('home'))
-    return render_template('connexion.html', form=form)
+    return render_template('connexion.html', form_login=form_login, form_inscription=form_inscription)
+
 
 @app.route('/logout')
 def logout():
@@ -657,3 +666,4 @@ def add_role():
     json = request.get_json()
     add_role_to_databse(json['nomRole'], json['description'], json['categories'])
     return redirect(url_for('edit_role'))
+
