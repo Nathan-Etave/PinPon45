@@ -40,6 +40,6 @@ class InscriptionForm(FlaskForm):
     id = HiddenField('id')
     nom = StringField(validators=[DataRequired()], render_kw={"placeholder": "Nom"})
     prenom = StringField(validators=[DataRequired()], render_kw={"placeholder": "Prénom"})
-    mail = StringField(validators=[DataRequired(), Email(message="Adresse email invalide")],render_kw={"placeholder": "Email"})
-    telephone = StringField(validators=[DataRequired(), Regexp(r'^\+(?:[0-9] ?){6,14}[0-9]$',message="Numéro de téléphone invalide")],render_kw={"placeholder": "Téléphone"})
+    mail = StringField(validators=[DataRequired(), Email()], render_kw={"placeholder": "Email"})
+    telephone = StringField(validators=[DataRequired(), Regexp(r'^\+?(?:[0-9] ?){6,14}[0-9]$',message="Numéro de téléphone invalide")],render_kw={"placeholder": "Téléphone"})
     submit = SubmitField('Ajouter')

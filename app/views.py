@@ -62,7 +62,7 @@ def login():
     form_login = LoginForm()
     user = get_user_by_email(form_login.mail.data)
     form_inscription = InscriptionForm()
-    print("form_inscription.validate_on_submit()")
+    print(form_inscription.validate_on_submit())
     if form_inscription.validate_on_submit():
         #une mdp aléatoire est généré
         passe= "$2b$12$yZ4bKUsJdEkcnBSsCUynze3rSdCW17As0.1xztdqVJi6iHYGKcXWe"
@@ -77,8 +77,11 @@ def login():
             print("Mail non utilisé")
             add_user(form_inscription.prenom.data, form_inscription.nom.data, form_inscription.mail.data,form_inscription.telephone.data,role, passe)
     if form_login.validate_on_submit():
+        print("cc")
         if user:
+            print("user")
             if check_password_hash(user.mdpPompier, form_login.mdp.data):
+                print("mdp ok")
                 login_user(user, remember=True)
                 return redirect(url_for('home'))
     return render_template('connexion.html', form_login=form_login, form_inscription=form_inscription)

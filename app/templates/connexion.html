@@ -16,43 +16,47 @@
                 <form method="POST" class="page_connexion" action="">
                     {{ form_login.hidden_tag() }}
                     <h1>Connexion</h1>
-                <div class="email">
-                    <p>Email</p>
-                    {{ form_login.mail(size=50) }}
-                </div>
-                <div class="password">
-                    <p>Mot de passe</p>
-                   {{ form_login.mdp(size=50) }}
-                </div>
-                <div class="connexion">
-                    {{ form_login.submit }}
-                </div>
-                <div class="mdp_oublier">
-                    <a href="#">Mot de passe oublié ?</a>
-                </div>
-            </form>
-            <form method="POST" class="page_inscription" action="">
-                <h1>Inscription</h1>
-                {{ form_inscription.hidden_tag() }}
-            <div class="nom">
-                <p>nom</p>
-                {{ form_inscription.nom(size=50) }}
-            </div>
-            <div class="prénom">
-                <p>prénom</p>
-               {{ form_inscription.prenom(size=50) }}
-            </div>
-            <div class="email">
-                <p>Email</p>
-                {{ form_inscription.mail }}
-            </div>
-            <div class="telephone">
-                <p>telephone</p>
-                {{ form_inscription.telephone }}
-            </div>
-            <div class="inscrit">
-                {{ form_inscription.submit }}
-            </div>
-        </form>
+                    <div class="email">
+                        <p>Email</p>
+                        {{ form_login.mail(size=50) }}
+                    </div>
+                    <div class="password">
+                        <p>Mot de passe</p>
+                        {{ form_login.mdp(size=50) }}
+                    </div>
+                    <div class="connexion">
+                        {{ form_login.submit }}
+                    </div>
+                    <div class="mdp_oublier">
+                        <a href="#">Mot de passe oublié ?</a>
+                    </div>
+                </form>
+                <form method="POST" class="page_inscription" action="">
+                    <h1>Inscription</h1>
+                    {{ form_inscription.hidden_tag() }}
+                    <div class="nom">
+                        <p>nom</p>
+                        {{ form_inscription.nom(size=50) }}
+                    </div>
+                    <div class="prénom">
+                        <p>prénom</p>
+                        {{ form_inscription.prenom(size=50) }}
+                    </div>
+                    <div class="email">
+                        <p>Email</p>
+                        {{ form_inscription.mail }}
+                    </div>
+                    <div class="telephone">
+                        <p>telephone</p>
+                        {{ form_inscription.telephone }}
+                        {% for error in form_inscription.telephone.errors %}
+                        <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="inscrit">
+                        {{ form_inscription.submit }}
+                    </div>
+                </form>
             </main>
+            
         </body>
