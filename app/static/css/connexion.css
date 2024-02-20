@@ -1,9 +1,8 @@
 main{
     display:flex;
     justify-content: center;
-}
-body{
     overflow: hidden;
+    margin-bottom: 2rem;
 }
 .page_connexion, .page_inscription{
     background: #004F8A;
@@ -15,7 +14,7 @@ body{
     margin-left: 1rem;
     margin-right: 1rem;
 }
-.email>p, .password>p {
+.email>p, .password>p,.nom>p,.prénom>p,.telephone>p{
     color: white;
     font-size: 200%;
 
@@ -25,14 +24,15 @@ h1{
     text-align: center;
     font-size: 300%;
     margin-top: 2rem;
+    flex-basis: 100%;
 }
-.email>input, .password>input {
+.email>input, .password>input,.nom>input,.prénom>input,.telephone>input {
     border: none;
     border-radius: 2rem;
     padding: 0.5rem;
     width: 50%;
 }
-.connexion>input {
+.connexion>input,.inscrit>input {
     margin-top: 0%;
     font-size: 150%;
     background: white;
@@ -42,21 +42,22 @@ h1{
     color:  #004F8A;
     cursor: pointer;
     padding:1rem;
+    
 }
 
 
-.connexion>input:hover {
+.connexion>input:hover,.inscrit>input:hover {
     color: rgb(253, 0, 0);
     transition: 0.5s;
 }
 
-.email, .password,.connexion{
+.email, .password,.connexion,.nom,.prénom,.telephone,.inscrit{
     padding-right: 0rem;
     flex-basis: 100%;
     text-align: center;
   
 }
-.connexion{
+.connexion, .inscrit{
     margin-top: 4rem;
     margin-bottom: 4rem;
     margin-left: 1rem;
@@ -121,10 +122,10 @@ body{
         border-radius: 5rem;
         font-size: 200%;
     }
-    .email, .password,.connexion{
+    .email, .password,.connexion,.nom,.prénom,.telephone,.inscrit{
         margin-top: 10rem;
     }
-    .connexion>input {
+    .connexion>input,.inscrit>input {
         width: 47%;
         height: 47%;
         margin-top: 30%;

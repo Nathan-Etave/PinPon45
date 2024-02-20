@@ -105,3 +105,21 @@ def create_Notification(id_Utilisateur, id_Fichier, date_Heure_Notification,type
     session.add(notification)
     session.commit()
     session.close()
+    
+def change_mdp(id,mdp):
+    """
+    Change le mot de passe d'un utilisateur.
+
+    Args:
+        id (int): L'identifiant de l'utilisateur.
+        mdp (str): Le nouveau mot de passe.
+
+    Returns:
+        None
+    """
+    Session = sessionmaker(bind=db.engine)
+    session = Session()
+    user = session.query(UTILISATEUR).filter_by(id_Utilisateur=id).first()
+    user.mdp_Utilisateur = mdp
+    session.commit()
+    session.close()

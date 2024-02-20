@@ -1,0 +1,51 @@
+form{
+    background-color: #004F8A;
+    border-radius: 2rem;
+    margin-top: 5rem;
+}
+.email>input {
+    border: none;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    width: 50%;
+    margin: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+h1{
+    color: white;
+    text-align: center;
+    font-size: 300%;
+    margin: 2rem;
+
+}
+
+.email>p, .password>p {
+    color: white;
+    margin: 2rem;
+    margin-bottom: 1rem;
+    font-size: 200%;
+}
+main{
+    display:flex;
+    justify-content: center;
+}
+
+.envoyer{
+    padding-right: 0rem;
+    flex-basis: 100%;
+    text-align: center;
+}
+.envoyer>input {
+    margin-top: 0%;
+    font-size: 150%;
+    background: white;
+    border: none;
+    border-radius: 2rem;
+    padding-top: 0%;
+    color:  #004F8A;
+    cursor: pointer;
+    margin: 2rem;
+    margin-left: 0rem;
+}

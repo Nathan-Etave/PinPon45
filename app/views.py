@@ -44,8 +44,6 @@ def login():
         #une mdp aléatoire est généré
         passe= generate_password()
         password = generate_password_hash(passe).decode('utf-8')
-        print(password)
-        print(passe)
         
         print("Form validé")
         role = None
@@ -59,12 +57,14 @@ def login():
             add_user(form_inscription.prenom.data, form_inscription.nom.data, form_inscription.mail.data,form_inscription.telephone.data,role, password,est_Actif_Utilisateur)
             create_Notification(get_user_by_email(form_inscription.mail.data).id_Utilisateur, None, datetime.now(), "Inscription")
             print("Mail envoyé")
+            print(form_inscription.mail.data)
+            print(passe)
             mailInscription(form_inscription.mail.data, passe)
     if form_login.validate_on_submit():
         print("cc")
         if user:
             print("user")
-            if check_password_hash(user.mdpPompier, form_login.mdp.data):
+            if check_password_hash(user.mdp_Utilisateur, form_login.mdp.data):
                 print("mdp ok")
                 login_user(user, remember=True)
                 return redirect(url_for('home'))
@@ -83,5 +83,11 @@ def mdp_oublie():
         user = get_user_by_email(form.mail.data)
         if user:
             print("user")
-            print(user.mdpPompier)
+            mdp = generate_password()
+            password = generate_password_hash(mdp).decode('utf-8')
+            change_mdp(user.id_Utilisateur, password)
+            
+                  
+            
+            mailOublie(form.mail.data, mdp)
     return render_template('mdp_oublier.html', form=form)

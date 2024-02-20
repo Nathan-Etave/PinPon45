@@ -69,6 +69,3 @@ def mailOublie(destinataire, mdp):
     mailserver.sendmail('pinpinpinponponpon45@gmail.com', destinataire,
                         msg.as_string())
     mailserver.quit()
-
-
-mailInscription("louis.lebeaupin@gmail.com", "1234")

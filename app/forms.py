@@ -43,6 +43,8 @@ class InscriptionForm(FlaskForm):
     mail = StringField(validators=[DataRequired(), Email()], render_kw={"placeholder": "Email"})
     telephone = StringField(validators=[DataRequired(), Regexp(r'^\+?(?:[0-9] ?){6,14}[0-9]$',message="Numéro de téléphone invalide")],render_kw={"placeholder": "Téléphone"})
     submit = SubmitField('Ajouter')
+    
+    
 class MdpOublieForm(FlaskForm):
     mail = StringField(validators=[DataRequired(), Email()], render_kw={"placeholder": "Email"})
     submit = SubmitField('Envoyer')
