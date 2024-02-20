@@ -45,6 +45,9 @@
                     <div class="email">
                         <p>Email</p>
                         {{ form_inscription.mail }}
+                        {% for error in form_inscription.mail.errors %}
+                        <p class="error">{{ error }}</p>
+                        {% endfor %}
                     </div>
                     <div class="telephone">
                         <p>telephone</p>

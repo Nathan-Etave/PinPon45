@@ -84,6 +84,7 @@ def login():
                 print("mdp ok")
                 login_user(user, remember=True)
                 return redirect(url_for('home'))
+                print("ok")
     return render_template('connexion.html', form_login=form_login, form_inscription=form_inscription)
 
 
