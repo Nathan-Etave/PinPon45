@@ -53,7 +53,7 @@ def mailOublie(destinataire, mdp):
         </head>
     <body>
         <p>Bonjour,</p>
-        <p>Vous avez perdu vor mot de passe le voici :</p>
+        <p>Vous avez perdu votre mot de passe le voici :</p>
         <p>connectez-vous à l'aide du mot de passe suivant : """ + mdp + """</p>
         <p>La prochaine fois, n'oubliez pas votre mot de passe !</p>
         <p>Cordialement,<br>L'équipe de PinPon45</p>
