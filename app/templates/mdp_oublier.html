@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+    <html lang="fr">
+        <head>
+            <meta charset="utf-8">
+            <meta name="mdp_oublier">
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/header.css')}}">
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/bottomHeader.css')}}">
+            <link rel="stylesheet" href="{{ url_for('static',filename='css/mediaBottomHeader.css')}}">
+            <title>Connexion</title>
+        </head>
+        <body> 
+            {% include "components/headerLogin.html" %}
+            {% include "components/bottomHeader.html" %}
+            <main>
+                <form method="POST" class="page_MDP_oublié" action="">
+                    {{ form_mdp_oublier.hidden_tag() }}
+                    <h1>Mot de passe oublié</h1>
+                    <div class="email">
+                        <p>Email</p>
+                        {{ form_mdp_oublier.mail(size=50) }}
+                    </div>
+                    <div class="envoyer">
+                        {{ form_mdp_oublier.submit }}
+                    </div>
+                   
+                </form>

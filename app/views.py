@@ -9,6 +9,7 @@ from app.requests import *
 from app.forms import *
 from app import login_manager
 from datetime import datetime
+from app.mail import *
 
 
 @login_manager.user_loader
@@ -57,6 +58,8 @@ def login():
             print("Mail non utilisé")
             add_user(form_inscription.prenom.data, form_inscription.nom.data, form_inscription.mail.data,form_inscription.telephone.data,role, password,est_Actif_Utilisateur)
             create_Notification(get_user_by_email(form_inscription.mail.data).id_Utilisateur, None, datetime.now(), "Inscription")
+            print("Mail envoyé")
+            mailInscription(form_inscription.mail.data, passe)
     if form_login.validate_on_submit():
         print("cc")
         if user:
@@ -73,3 +76,12 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+@app.route('/mdp_oublie', methods=['GET', 'POST'])
+def mdp_oublie():
+    form = MdpOublieForm()
+    if form.validate_on_submit():
+        user = get_user_by_email(form.mail.data)
+        if user:
+            print("user")
+            print(user.mdpPompier)
+    return render_template('mdp_oublier.html', form=form)
