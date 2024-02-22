@@ -2,33 +2,30 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/bottomHeader.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/mediaBottomHeader.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}" />  
-        <script type="module" src="{{ url_for('static', filename='js/notifications.js') }}"></script>
-        <script type="module" src="{{ url_for('static', filename='js/header.js') }}"></script>
-        <title>Notification(s)</title>
-    </head>
-<body>
-{% include 'components/header.html' %}
-{% include 'components/bottomHeader.html' %}
+        <head>
+            <script src="{{url_for('static', filename='js/notification.js')}}"></script> 
+        </head>
+        {% include "components/header.html" %}
+    <body>
 <div class="container">
     <ul class="notif">
-        {% for notification,fichier,date in liste_notifications %}
-            <li class="notification" id = "notification">
-                <span class="file_id" style="display: none;">{{ fichier.idFichier }}</span>
-                <span class="notification_id" style="display: none;">{{ notification.idNotification }}</span>
-                <span class="date_id" style="display: none;">{{ date.idDate }}</span>
-                <div class="texte">
-                    <h3>{{ notification.typeChange }} sur <a style="color: white;" href="{{ url_for('file', id_fichier=fichier.idFichier) }}">{{ fichier.nomFichier }}</a> ({{ fichier.idFichier }}) le {{ date.laDate.strftime('%d/%m/%Y') }} à {{ date.laDate.strftime('%H:%M') }}</h3>
-                    <p>{{ notification.texteNotification }}</p>
-                    <h4> Raison : </h4>
-                    <p>{{ notification.raisonNotification }}</p>
-                </div >
-                <bouton class="supprimer" type="button" id="delete_user_notification">X</bouton>
-            </li>
-        {% endfor %}
+        {% for notification, utilisateur in liste_notifications_inscription %}
+    <li class="notification" id="notification{{ notification.id_Notification }}">
+        <div class="contenue">
+            <p>{{ notification.typeNotification }}</p>
+            <p>{{ notification.date_Heure_Notification }}</p>
+            <p>Nom de l'utilisateur : {{ utilisateur.nom_Utilisateur }}</p>
+            <p>Prénom de l'utilisateur : {{ utilisateur.prenom_Utilisateur }}</p>
+            <select name="role" id="role{{ notification.id_Notification }}">
+                {% for role in roles %}
+                    <option value="{{ role.nom_Role }}">{{ role.nom_Role }}</option>
+                {% endfor %}
+            </select>
+            <button class="ok" id="{{ notification.id_Notification }}" user-id="{{ utilisateur.id_Utilisateur }}"  data-notification="{{ notification.id_Notification }}">Accepter</button>
+            <button class="non" id="non" user-id="{{ utilisateur.id_Utilisateur }}"  data-notification="{{ notification.id_Notification }}">Refuser</button>
+        </div>
+    </li>
+{% endfor %}
     </ul>
 </div>
 </body>

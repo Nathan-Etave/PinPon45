@@ -1,26 +1,47 @@
-document.addEventListener('DOMContentLoaded', function() {
-	let removeNotificationButtons = document.getElementsByClassName('supprimer');
-	Array.from(removeNotificationButtons).forEach(function(button) {
-		button.addEventListener('click', function() {
-			let fileId = button.parentElement.getElementsByClassName('file_id')[0].textContent;
-			let notificationId = button.parentElement.getElementsByClassName('notification_id')[0].textContent;
-			let dateId = button.parentElement.getElementsByClassName('date_id')[0].textContent;
-			fetch('remove_from_notifications', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					id_file: fileId,
-					id_notification: notificationId,
-					id_date: dateId
-				})
-			})
-			.then(response => {
-				if (response.redirected) {
-					window.location.href = response.url;
-				}
-			});
-		});
-	});
+document.addEventListener('DOMContentLoaded', function() { 
+    let acceptButtons = document.querySelectorAll('.ok');
+    acceptButtons.forEach(function(button) {
+        let id = button.id;
+        let role = document.getElementById('role'+id).value;
+        let  userId = button.getAttribute('user-id');
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            fetch('/utilisateurAccepter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
+                    role: role,
+                    userId: userId
+                })
+            })
+            .then(response => {
+                document.getElementById('notification'+id).remove();
+            })
+        });
+    });
+
+    let refuseButtons = document.querySelectorAll('.non');
+    refuseButtons.forEach(function(button) {
+        let id = button.getAttribute('data-notification');
+        let userId = button.getAttribute('user-id');
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            fetch('/utilisateurRefuser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
+                    userId: userId
+                })
+            })
+            .then(response => {
+                document.getElementById('notification'+id).remove();
+            })
+        });
+    });
 });
